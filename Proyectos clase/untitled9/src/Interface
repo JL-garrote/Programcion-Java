@@ -1,0 +1,4 @@
+public interface MiInterfaz {
+    void metodo1(); // método abstracto sin implementación
+    int metodo2(int parametro); // método abstracto con parámetro
+}
