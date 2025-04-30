@@ -11,12 +11,13 @@ public class MisPacientes {
     private static String dni;
     private static String enfermedad;
     private static String tratamiento;
+    private static int numeros;
+    private static String letra;
 
     ArrayList<Pacientes> personas = new ArrayList<>();
     Scanner keyboard = new Scanner(System.in);
 
     void registro() {
-
         try {
 
             System.out.println("Ingrese el nombre");
@@ -28,8 +29,13 @@ public class MisPacientes {
             System.out.println("Ingresa DNI");
 
             do {
-                dni = keyboard.next();
-            } while (dni.length() < 9);
+                System.out.println("Ingrese la parte numerica");
+                numeros = keyboard.nextInt();
+                System.out.println("Ingrese la letra");
+                letra = keyboard.next().toUpperCase();
+
+                dni = numeros + letra;
+            } while (dni.length() < 9 && numeros < 99999999);
 
             if (existe(dni)) {
                 System.out.println("El paciente ya existe");
@@ -44,17 +50,15 @@ public class MisPacientes {
 
             Pacientes a = new Pacientes(nombre, apellidos, dni, enfermedad, tratamiento);
             personas.add(a);
-
-        }catch (InputMismatchException e) {
-            System.out.println(e.getMessage());
+        }catch (Exception e) {
+            System.err.println("Error en el registro");
         }
     }
 
     boolean existe(String dni) {
-
         boolean existe = false;
 
-        for (Pacientes a : personas) {
+        for(Pacientes a : personas) {
             if (a.getDni().equalsIgnoreCase(dni)) {
                 existe = true;
             }
@@ -63,39 +67,54 @@ public class MisPacientes {
     }
 
     void darAlta() {
+        try {
+            System.out.println("Introduzca el documento de identificacion del paciente");
+            do {
+                System.out.println("Ingrese la parte numerica");
+                numeros = keyboard.nextInt();
+                System.out.println("Ingrese la letra");
+                letra = keyboard.next().toUpperCase();
 
-        System.out.println("Introduzca el documento de identificacion del paciente");
-        do {
-            dni = keyboard.next();
-        } while (dni.length() < 9);
+                dni = numeros + letra;
+            } while (dni.length() < 9 && numeros < 99999999);
 
-        for (int i = 0; i < personas.size(); i++) {
-            if (personas.get(i).getDni().equals(dni)) {
-                personas.remove(i);
-
+            for (int i = 0; i < personas.size(); i++) {
+                if (personas.get(i).getDni().equals(dni)) {
+                    personas.remove(i);
+                    ;
+                }
             }
+        }catch (Exception e){
+            System.out.println("Error al dar de alta");
         }
     }
 
     void ingreso() {
+        try {
+            Pacientes a = new Pacientes(nombre, apellidos, dni, enfermedad, tratamiento);
+            System.out.println("Introduzca el documento de identificacion del paciente");
+            do {
+                System.out.println("Ingrese la parte numerica");
+                numeros = keyboard.nextInt();
+                System.out.println("Ingrese la letra");
+                letra = keyboard.next().toUpperCase();
 
-        Pacientes a = new Pacientes(nombre, apellidos, dni, enfermedad, tratamiento);
-        System.out.println("Introduzca el documento de identificacion del paciente");
-        do {
-            dni = keyboard.next();
-        } while (dni.length() < 9);
+                dni = numeros + letra;
+            } while (dni.length() < 9 && numeros < 99999999);
 
-        for (int i = 0; i < personas.size(); i++) {
-            if (personas.get(i).getDni().equals(dni)) {
-                a.setIngresado(true);
+            for (int i = 0; i < personas.size(); i++) {
+                if (personas.get(i).getDni().equals(dni)) {
+                    a.setIngresado(true);
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Error en el ingreso");
         }
     }
 
     void listaIngreso() {
-
         for (Pacientes a : personas) {
-            if(a.getDni().equals(true)) {
+            if(!a.isIngresado()) {
                 System.out.println("El nombre del paciente es " + a.getNombre());
                 System.out.println("El apellido del paciente es " + a.getApellidos());
                 System.out.println("El documento de identificacion del paciente es " + a.getDni());
@@ -107,13 +126,13 @@ public class MisPacientes {
     }
 
     void lista() {
-
         for (Pacientes a : personas) {
-                System.out.println("El nombre del paciente es " + a.getNombre());
-                System.out.println("El apellido del paciente es " + a.getApellidos());
-                System.out.println("El documento de identificacion del paciente es " + a.getDni());
-                System.out.println("La enfermedad del paciente es " + a.getEnfermedad());
-                System.out.println("El tratamiento del paciente es " + a.getTratamiento());
+            System.out.println("El nombre del paciente es " + a.getNombre());
+            System.out.println("El apellido del paciente es " + a.getApellidos());
+            System.out.println("El documento de identificacion del paciente es " + a.getDni());
+            System.out.println("La enfermedad del paciente es " + a.getEnfermedad());
+            System.out.println("El tratamiento del paciente es " + a.getTratamiento());
         }
     }
+
 }

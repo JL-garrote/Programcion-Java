@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
         MisPacientes pacientes = new MisPacientes();
         Scanner keyboard = new Scanner(System.in);
@@ -65,6 +65,6 @@ public class Main {
                 valido = true;
                 keyboard.nextLine();
             }
-        } while (!valido);
+        }while (!valido);
     }
 }

@@ -7,7 +7,7 @@ public class Pacientes {
     String dni;
     String enfermedad;
     String tratamiento;
-    boolean ingresado;
+    boolean ingresado = false;
 
     public Pacientes(String nombre, String apellidos, String dni, String enfermedad, String tratamiento) {
         this.nombre = nombre;
@@ -64,4 +64,6 @@ public class Pacientes {
     public void setIngresado(boolean ingresado) {
         this.ingresado = ingresado;
     }
+}
+
 }
